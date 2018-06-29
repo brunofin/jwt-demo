@@ -1,11 +1,8 @@
 {
-  "name": "jwt-demo-service2",
-  "version": "1.0.0",
-  "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "concurrently \"npm run install:backend\" \"npm run install:frontend\"",
-    "start": "concurrently -k \"npm run start:backend\" \"npm run start:frontend\"",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
     "start:backend": "npm start --prefix backend",
     "start:frontend": "npm start --prefix frontend",
     "install:backend": "npm i --prefix backend",
@@ -13,7 +10,5 @@
   },
   "dependencies": {
     "concurrently": "^3.6.0"
-  },
-  "author": "Bruno Finger",
-  "license": "MIT"
+  }
 }
