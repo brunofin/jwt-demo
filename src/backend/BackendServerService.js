@@ -1,5 +1,6 @@
 const express = require('express');
 const jwt = require('express-jwt');
+const cors = require('cors');
 const { Resource1Controller } = require('./resource/Resource1Controller');
 const { Resource2Controller } = require('./resource/Resource2Controller');
 const { AuthorizationController } = require('../authorization/AuthorizationController');
@@ -12,10 +13,15 @@ class BackendServerService {
     initializeServer() {
         const { secret, backendPort:port } = this.config;
         const app = express();
+
+        app.use(cors());
         
         app.get('/protected1', jwt({ secret }, Resource1Controller.getResource));
         app.get('/protected2', jwt({ secret }, Resource2Controller.getResource));
         app.get('/authorize', AuthorizationController.authorize);
+        app.get('/api/resource', (req, res) => {
+            res.send({ data: "teeeeeest"});
+        });
         
         app.listen(port, function () {
             console.info(`BACKEND listening on port:\t\t${ port }`);
