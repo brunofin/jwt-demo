@@ -1,0 +1,5 @@
+{ 
+    "secret": "SUPER-SECRET-STUFF",
+    "cloudPort": 8080,
+    "backendPort": 8081
+}

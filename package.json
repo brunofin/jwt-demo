@@ -2,19 +2,16 @@
   "name": "jwt-demo",
   "version": "1.0.0",
   "description": "",
+  "main": "src/index.js",
   "scripts": {
-    "postinstall": "concurrently \"npm run install:cloud\" \"npm run install:service1\" \"npm run install:service2\"",
-    "start": "concurrently \"npm run start:cloud\" \"npm run start:service1\" \"npm run start:service2\"",
-    "start:cloud": "npm start --prefix cloud",
-    "start:service1": "npm start --prefix service1",
-    "start:service2": "npm start --prefix service2",
-    "install:cloud": "npm i --prefix cloud",
-    "install:service1": "npm i --prefix service1",
-    "install:service2": "npm i --prefix service2"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
   },
   "author": "Bruno Finger",
   "license": "MIT",
   "dependencies": {
-    "concurrently": "^3.6.0"
+    "angular": "^1.7.2",
+    "express": "^4.16.3",
+    "express-jwt": "^5.3.1"
   }
 }
