@@ -7,14 +7,14 @@ class FrontendServerService {
     }
 
     initializeServer() {
-        const { secret, frontendPort:port } = this.config;
+        const { secret, frontendPort: port } = this.config;
         const app = express();
-        
+
         app.use(express.static(path.join(__dirname, 'assets')));
         app.use(express.static(path.join(__dirname, '../../node_modules')));
 
         app.listen(port, function () {
-            console.info(`FRONTEND listening on port:\t\t${ port }`);
+            console.info(`FRONTEND listening on port:\t\t${port}`);
         });
 
         return app;

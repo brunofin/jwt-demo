@@ -9,9 +9,11 @@ const servers = [
     new FrontendServerService(config)
 ];
 
-try {
-    servers.forEach(server => server.initializeServer());
-} catch (e) {
-    console.error(e);
-    throw e;
-}
+servers.forEach(server => {
+    try {
+        server.initializeServer()
+    } catch (e) {
+        console.error(e);
+        throw e;
+    }
+});

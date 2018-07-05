@@ -1,6 +1,6 @@
 const express = require('express');
-const jwt = require('express-jwt');
 const cors = require('cors');
+const request = require('request');
 const { Resource1Controller } = require('./resource/Resource1Controller');
 const { Resource2Controller } = require('./resource/Resource2Controller');
 const { AuthorizationController } = require('../authorization/AuthorizationController');
@@ -16,11 +16,17 @@ class BackendServerService {
 
         app.use(cors());
         
-        app.get('/protected1', jwt({ secret }, Resource1Controller.getResource));
-        app.get('/protected2', jwt({ secret }, Resource2Controller.getResource));
-        app.get('/authorize', AuthorizationController.authorize);
+        app.get('/protected1', Resource1Controller.getResource);
+        app.get('/protected2', Resource2Controller.getResource);
+        // app.get('/authorize', AuthorizationController.authorize);
         app.get('/api/resource', (req, res) => {
-            res.send({ data: "teeeeeest"});
+            request(`http://localhost:${ this.config.cloudPort }/public`,{ json: true }, (err, response, body) => {
+                if (err) {
+                    throw err;
+                } else {
+                    res.json(body);
+                }
+            });
         });
         
         app.listen(port, function () {
