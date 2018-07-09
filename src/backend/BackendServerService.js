@@ -3,7 +3,6 @@ const cors = require('cors');
 const request = require('request');
 const { Resource1Controller } = require('./resource/Resource1Controller');
 const { Resource2Controller } = require('./resource/Resource2Controller');
-const { AuthorizationController } = require('../authorization/AuthorizationController');
 
 class BackendServerService {
     constructor(config) {
@@ -16,9 +15,8 @@ class BackendServerService {
 
         app.use(cors());
         
-        app.get('/protected1', Resource1Controller.getResource);
-        app.get('/protected2', Resource2Controller.getResource);
-        // app.get('/authorize', AuthorizationController.authorize);
+        app.get('/api/protected1', Resource1Controller.getResource(this.config));
+        app.get('/api/protected2', Resource2Controller.getResource);
         app.get('/api/resource', (req, res) => {
             request(`http://localhost:${ this.config.cloudPort }/public`,{ json: true }, (err, response, body) => {
                 if (err) {
@@ -35,7 +33,7 @@ class BackendServerService {
 
         return app;
     }
-}
+};
 
 module.exports = {
     BackendServerService

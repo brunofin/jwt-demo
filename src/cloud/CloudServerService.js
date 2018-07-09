@@ -1,5 +1,4 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const passportJWT = require("passport-jwt");
@@ -8,8 +7,8 @@ const JwtStrategy = passportJWT.Strategy;
 
 const { Resource1Controller } = require('./resource/Resource1Controller');
 const { Resource2Controller } = require('./resource/Resource2Controller');
-const { AuthorizationController } = require('../authorization/AuthorizationController');
-const { UserService } = require('../authorization/UserService');
+const { AuthorizationController } = require('./authorization/AuthorizationController');
+const { UserService } = require('./authorization/UserService');
 class CloudServerService {
     constructor(config) {
         this.config = config;
@@ -41,10 +40,10 @@ class CloudServerService {
             extended: true
         }));
 
-        app.post("/login", AuthorizationController.authorize(jwtOptions));
-        app.get('/protected1', passport.authenticate('jwt', { session: false }), Resource1Controller.getResource);
-        app.get('/protected2', passport.authenticate('jwt', { session: false }), Resource2Controller.getResource);
-        app.get('/public', function(req, res) {
+        app.post("/api/login", AuthorizationController.authorize(jwtOptions));
+        app.get('/api/protected1', passport.authenticate('jwt', { session: false }), Resource1Controller.getResource);
+        app.get('/api/protected2', passport.authenticate('jwt', { session: false }), Resource2Controller.getResource);
+        app.get('/api/public', function(req, res) {
             res.json({ name: 'fromCloud' });
         });
 

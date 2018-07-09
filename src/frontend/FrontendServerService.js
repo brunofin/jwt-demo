@@ -19,7 +19,9 @@ class FrontendServerService {
 
         return app;
     }
-}
+};
+
+FrontendServerService.APP_ID = "frontend"
 
 module.exports = {
     FrontendServerService
