@@ -17,9 +17,10 @@ class CloudServerService {
     initializeServer() {
         const { secret, cloudPort: port } = this.config;
 
-        const jwtOptions = {}
-        jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeader();
-        jwtOptions.secretOrKey = secret;
+        const jwtOptions = {
+            jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('bearer'),
+            secretOrKey: secret
+        };
 
         const strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
             console.log('payload received', jwt_payload);

@@ -1,11 +1,12 @@
 const request = require('request');
+const { ConfigService } = require('../services/ConfigService');
 
 class CloudLoginService {
-    static doLogin(config) {
+    static doLogin() {
         return new Promise((resolve, reject) => {
             request({
                 method: 'POST',
-                url: `http://localhost:${config.cloudPort}/api/login`,
+                url: `http://localhost:${ ConfigService.getConfig().cloudPort }/api/login`,
                 json: {
                     name: CloudLoginService.APP_USER,
                     password: CloudLoginService.APP_PASSWORD,

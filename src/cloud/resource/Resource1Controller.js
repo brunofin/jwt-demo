@@ -1,7 +1,6 @@
 class Resource1Controller {
-    static getResource(req, res, next) {
-        console.log(req, res);
-        next();
+    static getResource(req, res) {
+        res.json({ name: 'fromCloud with AUTH' });
     }
 }
 
