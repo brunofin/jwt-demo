@@ -3,7 +3,7 @@ const request = require('request');
 const { CloudLoginService } = require('../authorization/CloudLoginService');
 
 module.exports = {
-    HttpDao: function (options, callback) {
+    HttpDao: function (options, callback, authLevel) {
         if (!options.headers) {
             options.headers = {};
         }
@@ -13,7 +13,7 @@ module.exports = {
 
         return request(options, (err, response, body) => {
             if (response.statusCode === 401) {
-                CloudLoginService.doLogin().then(() => {
+                CloudLoginService.doLogin(authLevel).then(() => {
                     options.headers.Authorization = `bearer ${CloudLoginService.TOKEN}`;
                     request(options, callback);
                 });

@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const request = require('request');
-const { Resource1Controller } = require('./resource/Resource1Controller');
+const { ResourceLevel1Controller } = require('./resource/ResourceLevel1Controller');
 const { Resource2Controller } = require('./resource/Resource2Controller');
 const { ConfigService } = require('./services/ConfigService');
 
@@ -16,7 +16,7 @@ class BackendServerService {
 
         app.use(cors());
         
-        app.get('/api/protected1', Resource1Controller.getResource);
+        app.get('/api/protected1', ResourceLevel1Controller.getResource);
         app.get('/api/protected2', Resource2Controller.getResource);
         app.get('/api/resource', (req, res) => {
             request(`http://localhost:${ ConfigService.getConfig().cloudPort }/public`,{ json: true }, (err, response, body) => {

@@ -27,7 +27,7 @@ UserService.__users = [
         name: 'backend',
         password: 'backend',
         type: ClientType.Types.SERVICE
-    }
+    }, 
 ];
 
 module.exports = { UserService };
