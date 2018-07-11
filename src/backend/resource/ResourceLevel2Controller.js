@@ -9,7 +9,7 @@ class ResourceLevel2Controller {
             method: 'GET',
             url: `http://localhost:${ ConfigService.getConfig().cloudPort }/api/protected2`,
         },(err, response, body) => {
-            res.json(body);
+            res.send(body);
         }, AUTH_LEVEL);
     }
 }

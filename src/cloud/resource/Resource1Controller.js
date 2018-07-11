@@ -1,6 +1,6 @@
 class Resource1Controller {
     static getResource(req, res) {
-        res.json({ text: 'fromCloud with AUTH res1' });
+        res.send({ text: 'fromCloud with AUTH res1' });
     }
 }
 

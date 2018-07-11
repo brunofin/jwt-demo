@@ -1,5 +1,6 @@
 const { UserService } = require('./UserService');
 const { ClientIdService } = require('./ClientIdService');
+const { ClientType } = require('./ClientType');
 const jwt = require('jsonwebtoken');
 
 class AuthorizationController {
@@ -34,6 +35,32 @@ class AuthorizationController {
             }
         };
     };
+
+    static authorizeUser(req, res) {
+        if (req.body.name && req.body.password) {
+            const { name, password } = req.body;
+            const user = UserService.findByName(name);
+            
+            if (!user) {
+                console.info(`CLOUD: No such user in the database.`);
+                res.status(404).send();
+            }
+
+            if (user.type !== ClientType.Types.USER) {
+                res.status(401).send();
+            }
+            
+            if (user.password === password) {
+                console.info(`CLOUD: Authenticating user ${user.name}`);
+                res.status(200).send();
+
+            } else {
+                res.status(401).send();
+            }
+        } else {
+            res.status(400).send();
+        }
+    }
 };
 
 module.exports = {

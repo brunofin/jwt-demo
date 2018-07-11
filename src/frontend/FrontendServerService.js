@@ -15,6 +15,8 @@ class FrontendServerService {
 
         app.listen(port, function () {
             console.info(`FRONTEND listening on port:\t\t${port}`);
+            console.info('-----------------------------------------------------');
+
         });
 
         return app;

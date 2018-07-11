@@ -7,6 +7,28 @@
     </head>
     <body ng-app="jwt-demo" ng-controller="DemoController as ctrl">
         <h1>Hello JWT</h1>
-        <button class="access-level-1" ng-click="ctrl.button1()">Click me</button>
+
+        <div ng-controller="LoginCtrl as loginCtrl">
+            <form name="loginForm" ng-show="loginCtrl.isLoginFormVisible()">
+                <label for="usernameInput">Username</label>
+                <input name="usernameInput" type="text" ng-model="loginCtrl.username">
+
+                <label for="passwordInput">Password</label>
+                <input name="passwordInput" type="password" ng-model="loginCtrl.password">
+            </form>
+            <button ng-click="loginCtrl.login(loginCtrl.username, loginCtrl.password)" ng-show="loginCtrl.isLoginFormVisible()">Login</button>
+            <p ng-hide="loginCtrl.isLoginFormVisible()">Logged in.</p>
+        </div>
+
+        <br/>
+
+        <button class="authorization-level-0" ng-click="ctrl.button0()">No login required</button>
+        <button class="authorization-level-1" ng-disabled="ctrl.isButton1Disabled()" ng-click="ctrl.button1()">Authorization level: 1</button>
+        <button class="authorization-level-2" ng-disabled="ctrl.isButton2Disabled()" ng-click="ctrl.button2()">Authorization level: 2</button>
+
+        <br/>
+
+        <h1>Text:</h1>
+        <p ng-bind="ctrl.text"></p>
     </body>
 </html>
